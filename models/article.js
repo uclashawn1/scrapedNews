@@ -28,7 +28,7 @@ var articleSchema = new Schema({
 //link the ObjectId to the note model which will be used to 
 //populate an article with its associated note
     note: [{
-        type: schema.Types.objectId,
+        type: Schema.Types.objectId,
         ref: "note"
     }]
 });
