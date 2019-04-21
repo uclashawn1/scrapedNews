@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.jumbotron {
+    background: url("/public/images/oilPainting.jpeg") no-repeat fixed center;
+}
+
+.navbar-brand {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.display-4 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 86px;
+}
+
+html {
+    margin-bottom: 30px;
+}
+
+.jumbotron {
+    margin-bottom: -10px;
+}
+
+.eacharticle img {
+    width: 100%;
+    float: left;
+    height: auto;
+    border: 0 none;
+}
+
+.eacharticle {
+    float: left;
+    margin: 50px;
+    width: 400px;
+    height: 300px;
+    padding-bottom: 50px;
+}
+
+.eacharticle .text {
+    width: 100%;
+}
+
+.deleteButton, .saveButton, .deleteArticleButton, .notesButton {
+    margin-top: 10px;
+}
+
+.titleinsert {
+    font-size: 16px;
+}
+
+.summaryinsert {
+    font-size: 14px;
+}
+
+img { 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn {
+    margin-right: 10px;
+    background-color: hotpink;
+    text-decoration: none;
+    border: none;
+}
+
+.btn:hover {
+    background-color: grey;
+}
+
+
+nav {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+a:hover, a:active, a {
+    text-decoration: none;
+    color: grey;
+} 
+
+.btn:visited {
+    color: none;
+}
+
+a.nav-link.active {
+    color: grey;
+}
+
+.nav {
+    background-color: black;
+}
+
+.nav li {
+    margin: 10px;
+}
+
+.newnote {
+    margin-top: 10px;
+}
+
+.eachnote {
+    margin-top: 10px;
+}
+
+.noArticles {
+    margin-left: 15px;
+}
+

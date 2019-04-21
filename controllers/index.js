@@ -1,10 +1,44 @@
+var Article = require("../models/article.js");
 var cheerio = require("cheerio");
+var request = require('request');
+module.exports = function (app) {
 
-app.get("/scrape", function(req, res){
-    req("https:", function(err, response, html){
+    //Scrape articles
+    app.get("/scrape", function (req, res) {
+        request("https://www.latimes.com/local/lanow/", function (error, response, result) {
+            if(error) {
+                throw err;
+            } else {
+            var $ = cheerio.load(response);
+            $(".card__content").each(function (i, element) {
+                var result = {};
 
-    })
-    res.send("scrape done")
-})
+                result.title = $(this)
+                    .children(".card__details").children(".card__headlines").children(".card__headline").children(".card__link").children(".card__headline__text")
+                    .text();
 
-module.exports = app;
+                result.summary = $(this)
+                    .children(".card__details").children(".card__headlines").children(".card__description")
+                    .text();
+
+                result.image = $(this)
+                    .children("a").children(".card__image").children("img")
+                    .attr("src")
+
+                result.link = $(this)
+                    .children(".card__details").children(".card__headlines").children(".card__description").children("a")
+                    .attr("href")
+
+                Article.create(result)
+                    .then(function (dbArticle) {
+                        console.log(dbArticle);
+                    })
+                    .catch(function (err) {
+                        return res.json(err);
+                    });
+            });
+            res.send("Scrape Done");
+                    } 
+        });
+    });
+}
