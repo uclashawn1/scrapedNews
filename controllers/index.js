@@ -5,7 +5,7 @@ module.exports = function (app) {
 
     //Scrape articles
     app.get("/scrape", function (req, res) {
-        request("https://www.latimes.com/local/lanow/", function (error, response, result) {
+        request("https://www.huffpost.com/impact/business/", function (error, response, result) {
             if(error) {
                 throw err;
             } else {
