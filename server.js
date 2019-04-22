@@ -5,15 +5,26 @@ var path = require("path");
 const exphbs = require("express-handlebars");
 var express = require("express");
 var app = express();
-var PORT = process.env.PORT || 3000;
 
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapedNews";
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+
+if(process.env.MONGODB_URI) {
+  console.log('MDB')
+  mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});
+} else {
+  console.log('Local')
+  mongoose.connect("mongodb://localhost/scrapedNews", {useMongoClient: true}, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('connected')
+    }
+  })
+}
 
 // Use morgan for logging requests
 app.use(morgan("dev"));
