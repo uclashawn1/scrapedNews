@@ -9,15 +9,15 @@ var noteSchema = new Schema({
   // `title` is of type String
   body: {
     type: String
-},
+    },
     date: {
         type: Date,
         default: Date.now
-    },
+        },
 article: {
     type: Schema.Types.ObjectId,
     ref: "article"
-}
+    }
 });
 
 // This creates our model from the above schema, using mongoose's model method
