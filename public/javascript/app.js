@@ -6,8 +6,8 @@ $(document).on("click", ".scrapebutton", function () {
     })
         .done(function (data) {
             window.location = "/"
-        })
-})
+        });
+});
 
 //Save articles
 $(document).on("click", ".saveButton", function () {
@@ -18,8 +18,8 @@ $(document).on("click", ".saveButton", function () {
     })
         .done(function (data) {
             window.location = "/"
-        })
-})
+        });
+});
 
 //Delete all articles
 $(document).on("click", ".deleteAllButton", function () {
@@ -29,8 +29,8 @@ $(document).on("click", ".deleteAllButton", function () {
     })
         .done(function (data) {
             window.location = "/"
-        })
-})
+        });
+});
 
 //Delete an article
 $(document).on("click", ".deleteButton", function () {
@@ -41,8 +41,8 @@ $(document).on("click", ".deleteButton", function () {
     })
         .done(function (data) {
             window.location = "/"
-        })
-})
+        });
+});
 
 //Delete a saved article
 $(document).on("click", ".deleteArticleButton", function () {
@@ -54,8 +54,8 @@ $(document).on("click", ".deleteArticleButton", function () {
     })
         .done(function (data) {
             window.location = "/saved"
-        })
-})
+        });
+});
 
 //Save a note
 $(document).on("click", ".saveNotesButton", function () {
@@ -68,12 +68,13 @@ $(document).on("click", ".saveNotesButton", function () {
             text: $("#note" + newNoteId).val(),
             created: new Date()
         }
-    }).done(function (data) {
+    })
+    .done(function (data) {
         console.log(data);
         $("#note" + newNoteId).val("");
         window.location = "/saved"
-    })
-})
+    });
+});
 
 //Delete a note
 $(document).on("click", ".deleteNote", function () {
@@ -82,7 +83,8 @@ $(document).on("click", ".deleteNote", function () {
     $.ajax({
         method: "DELETE",
         url: "/api/deletenote/" + deleteNoteId,
-    }).done(function (data) {
-        window.location = "/saved"
     })
-})
+    .done(function (data) {
+        window.location = "/saved"
+    });
+});

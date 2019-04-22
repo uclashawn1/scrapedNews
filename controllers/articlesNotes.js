@@ -1,14 +1,14 @@
-var Article = require("../models/article.js");
+var article = require("../models/article.js");
 var express = require("express");
 var app = express(app);
-var Note = require("../models/note.js");
+var note = require("../models/note.js");
 
 
 module.exports = function (app) {
 
     //controller route gets unsaved articles - send to handlebars to render index page
     app.get("/", function (req, res) {
-        Article.find({ saved: false }).sort({ _id: -1 }).limit(30).exec(function (error, data) {
+        article.find({ saved: false }).sort({ _id: -1 }).limit(30).exec(function (error, data) {
             var hbsObject = {
                 article: data
             };
@@ -19,7 +19,7 @@ module.exports = function (app) {
 
     //route to get saved articles - send to saved.handlebars to render saved page
     app.get("/saved", function (req, res) {
-        Article.find({ saved: true }).populate("note").exec(function (error, article2) {
+        article.find({ saved: true }).populate("note").exec(function (error, article2) {
             var hbsObject = {
                 article: article2
             };
@@ -30,7 +30,7 @@ module.exports = function (app) {
 
     // Route to get all articles from the database
     app.get("/api/getarticles", function (req, res) {
-        Article.find({})
+        article.find({})
             .then(function (dbArticle) {
                 res.json(dbArticle);
             })
@@ -41,7 +41,7 @@ module.exports = function (app) {
 
     //Delete all articles
     app.delete("/api/deletearticles/", function (req, res) {
-        Article
+        article
             .remove({})
             .then(function (dbArticle) {
                 res.json(dbArticle)
@@ -50,7 +50,7 @@ module.exports = function (app) {
 
     //Get one article
     app.get("/api/getarticles/:id", function (req, res) {
-        Article.findOne({ _id: req.params.id })
+        article.findOne({ _id: req.params.id })
             .populate("note")
             .exec(function (error, doc) {
                 if (error) {
@@ -64,7 +64,7 @@ module.exports = function (app) {
 
     //Delete one article
     app.delete("/api/deletearticle/:id", function (req, res) {
-        Article
+        article
             .remove({ _id: req.params.id })
             .then(function (dbArticle) {
                 res.json(dbArticle)
@@ -74,7 +74,7 @@ module.exports = function (app) {
 
     //Save one article
     app.post("/api/savearticle/:id", function (req, res) {
-        Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
+        article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
             .exec(function (err, doc) {
                 if (err) {
                     console.log(err);
@@ -87,7 +87,7 @@ module.exports = function (app) {
 
     //Delete saved article
     app.delete("/api/deletesavearticle/:id", function (req, res) {
-        Article.findOneAndUpdate({ _id: req.params.id }, { saved: false })
+        article.findOneAndUpdate({ _id: req.params.id }, { saved: false })
             .exec(function (err, doc) {
                 if (err) {
                     console.log(err);
@@ -101,7 +101,7 @@ module.exports = function (app) {
     // save one note
     app.get("/api/savenote/:id", function (req, res) {
         var id = req.params.id;
-        Article.findById(id).populate("note").exec(function (err, data) {
+        article.findById(id).populate("note").exec(function (err, data) {
           res.send(data.note);
         })
       })
@@ -119,7 +119,7 @@ module.exports = function (app) {
           if (error) {
             console.log(error);
           } else {
-            Article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: note } })
+            article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: note } })
             .exec(function (err) {
                 if (err) {
                   console.log(err);
@@ -134,7 +134,7 @@ module.exports = function (app) {
       
       //Delete a note
       app.delete("/api/deletenote/:id", function (req, res) {
-        Note
+        note
           .remove({ "_id": req.params.id })
           .then(function (dbArticle) {
             res.json(dbArticle)

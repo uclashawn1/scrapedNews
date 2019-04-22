@@ -1,10 +1,10 @@
-var Article = require("../models/article.js");
+var article = require("../models/article.js");
 var cheerio = require("cheerio");
 var request = require('request');
 module.exports = function (app) {
 
     //Scrape articles
-    app.get("/scrape", function (req, res) {
+    app.get("/scrape", function (request, res) {
         request("https://www.huffpost.com/impact/business/", function (error, response, result) {
             if(error) {
                 throw err;
@@ -29,7 +29,7 @@ module.exports = function (app) {
                     .children(".card__details").children(".card__headlines").children(".card__description").children("a")
                     .attr("href")
 
-                Article.create(result)
+                article.create(result)
                     .then(function (dbArticle) {
                         console.log(dbArticle);
                     })

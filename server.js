@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-// render HTML templates and send them back to the client using (res.render)
+// render HTML templates and send them back to the client using (res render)
 app.engine("handlebars", exphbs({
   defaultLayout: "main",
   partialsDir: path.join(__dirname, "/views/layouts/partials")
