@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 // save schema reference
-var schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 // Using Schema constructor to create a new userSchema object
 var articleSchema = new Schema({
     title: {

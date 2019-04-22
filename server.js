@@ -1,3 +1,5 @@
+
+require('dotenv').config();
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
@@ -14,10 +16,10 @@ mongoose.Promise = Promise;
 
 if(process.env.MONGODB_URI) {
   console.log('MDB')
-  mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});
+  mongoose.connect(process.env.MONGODB_URI);
 } else {
   console.log('Local')
-  mongoose.connect("mongodb://localhost/scrapedNews", {useMongoClient: true}, function(err) {
+  mongoose.connect("mongodb://localhost/scrapedNews", function(err) {
     if (err) {
       console.log(err);
     } else {
@@ -25,6 +27,8 @@ if(process.env.MONGODB_URI) {
     }
   })
 }
+
+async = require('async');
 
 // Use morgan for logging requests
 app.use(morgan("dev"));
